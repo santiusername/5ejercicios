@@ -38,7 +38,7 @@ const ejercicio4 = () => {
     let i = 1;
 
     do {
-        mensaje += `5 x ${i} = ${5 * i}\n`;
+        mensaje += `5 x ${i} = ${5 * i}<br>`;
         i++;
     } while (i <= 10);
 
