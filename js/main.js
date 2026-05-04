@@ -5,7 +5,6 @@ const numero2Input = document.getElementById('numero2');
 const operacionSelect = document.getElementById('operacion');
 const btncalcular = document.getElementById('btncalcular');
 const resultadosDiv = document.getElementById('resultados');
-const numeroInput = document.getElementById("numeroInput");
 
 function calcular() {
     try {
@@ -19,137 +18,37 @@ function calcular() {
             case 'ejercicio1':
                 resultado = combine.ejer.ejercicio1();
                 break;
+
             case 'ejercicio2':
                 resultado = combine.ejer.ejercicio2();
                 break;
+
             case 'ejercicio3':
                 resultado = combine.ejer.ejercicio3(num1, num2);
                 break;
+
             case 'ejercicio4':
                 resultado = combine.ejer.ejercicio4();
                 break;
+
             case 'ejercicio5':
                 resultado = combine.ejer.ejercicio5(num1);
                 break;
 
+            default:
+                throw new Error('Operación no válida');
+        }
 
-// EJERCICIOS 5-10
-            case 'contador':
-                combine.contador.contadorRegresivo(numeroInput.value);
-                break;
-            case 'sumaPar':
-                combine.sumaPar.mostrarSuma();
-                break;
-            case 'impares':
-                combine.impares.procesarLimite();
-                break;
-            case 'potencia':
-                combine.potencia.mostrarPotencia();
-                break;
-            case 'secuencia':
-                combine.secuencia.procesarTerminos();
-                break; 
+        mostrarResultado(`📌 Resultado: ${JSON.stringify(resultado)}`);
 
+    } catch (error) {
+        mostrarResultado(`❌ Error: ${error.message}`, 'error');
+    }
+}
 
+function mostrarResultado(mensaje, tipo = 'success') {
+    resultadosDiv.textContent = mensaje;
+    resultadosDiv.className = `result ${tipo}`;
+}
 
-// -------- TUS EJERCICIOS 11–15 --------
-            case 'ejercicio11':
-                resultado = combine.ejer.ejercicio11(document.getElementById("arrayInput").value);
-                break;
-            case 'ejercicio12':
-                resultado = combine.ejer.ejercicio12(document.getElementById("arrayInput").value);
-                break;
-            case 'ejercicio13':
-                resultado = combine.ejer.ejercicio13(
-                    document.getElementById("arrayInput").value,
-                    document.getElementById("searchInput").value
-                );
-                break;
-            case 'ejercicio14':
-                resultado = combine.ejer.ejercicio14(document.getElementById("arrayInput").value);
-                break;
-            case 'ejercicio15':
-                resultado = combine.ejer.ejercicio15(document.getElementById("arrayInput").value);
-                break;
-
-            
-// ejercicios 15-20
-            case 'ejercicio15':
-                 resultado = combine.calc.ejercicio15(Number(num1), Number(num2)); 
-                 break;
-            case 'ejercicio16':
-                 resultado = combine.calc.ejercicio16(toArray('vectorXInput')); 
-                 break;
-            case 'ejercicio17':
-                 resultado = combine.calc.ejercicio17(num1, num2); 
-            break;
-            case 'ejercicio18':
-                 resultado = combine.calc.ejercicio18(num1, num2); 
-                 break;
-            case 'ejercicio19':
-                 resultado = combine.calc.ejercicio19(toArray('vectorXInput'), num2);
-                  break;
-
-            case 'ejercicio20':
-                resultado = combine.ejer.ejercicio20(numero1Input.value);
-                break;
-
-// 21-25 EJERCICIOS
-            case 'ejercicio21':
-                resultado = combine.ejer.ejercicio21([[1,2],[3,4]]);
-                break;
-            case 'ejercicio22':
-                resultado = combine.ejer.ejercicio22(num1, num2);
-                break;
-            case 'ejercicio23':
-                resultado = combine.ejer.ejercicio23([1,2,3], [4,5]);
-                break;
-            case 'ejercicio24':
-                resultado = combine.ejer.ejercicio24([1,3,5,7,9], num1);
-                break;
-            case 'ejercicio25':
-                resultado = combine.ejer.ejercicio25([1,2,3,4], num1);
-                break;
-
-// 25-30 EJERCICIOS
-            case 'ejercicio26':
-                resultado = combine.ejer.ejercicio26(document.getElementById("arrayInput").value.split(',').map(Number));
-            break;
-            case 'ejercicio27':
-            resultado = combine.ejer.ejercicio27(document.getElementById("arrayInput").value.split(',').map(Number),document.getElementById("arrayInput").value.split(',').map(Number));
-            break;
-            case 'ejercicio28':
-            resultado = combine.ejer.ejercicio28(num1);
-            break;
-            case 'ejercicio29': {
-            const matriz = document.getElementById("arrayInput").value.split(';').map(fila => fila.split(',').map(Number));
-            resultado = combine.ejer.ejercicio29(matriz, matriz);
-            break;}
-
-            case 'ejercicio30':
-                resultado = combine.ejer.ejercicio30(
-                    document.getElementById("arrayInput").value
-                        .split(',')
-                        .map(Number)
-                );
-                break;
-
-                        default:
-                            throw new Error('Operación no válida');
-                    }
-
-                    if (resultado !== undefined) {
-                        mostrarResultado(`📌 Resultado: ${JSON.stringify(resultado)}`);
-                    }
-
-                } catch (error) {
-                    mostrarResultado(`❌ Error: ${error.message}`, 'error');
-                }
-            }
-
-            function mostrarResultado(mensaje, tipo = 'success') {
-                resultadosDiv.textContent = mensaje;
-                resultadosDiv.className = `result ${tipo}`;
-            }
-
-            btncalcular.addEventListener('click', calcular);
+btncalcular.addEventListener('click', calcular);
